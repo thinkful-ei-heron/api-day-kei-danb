@@ -14,16 +14,6 @@ const main = function () {
       items.forEach((item) => store.addItem(item));
       shoppingList.render();
     });
-  store.items[0] = api.createItem('chicken')
-    .then(res => res.json())
-    .then((newItem) => {
-      store.addItem(newItem);
-      shoppingList.render();
-    });
-  const newItem = store.items[0];
-  console.log('current name: ' + newItem.name);
-  store.findAndUpdate(newItem.id, { name: 'foobar' });
-  console.log('new name: ' + newItem.name); 
   shoppingList.bindEventListeners();
   shoppingList.render();
 };

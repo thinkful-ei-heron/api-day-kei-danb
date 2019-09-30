@@ -18,7 +18,7 @@ const createItem = function(name) {
 };
 
 const updateItem = function(id, updateData){
-  fetch(`${BASE_URL}/items/${id}`, {
+  return fetch(`${BASE_URL}/items/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
@@ -27,8 +27,18 @@ const updateItem = function(id, updateData){
   });
 };
 
+const deleteItem = function(id){
+  return fetch(`${BASE_URL}/items/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+};
+
 export default {
   getItems,
   createItem,
-  updateItem
+  updateItem,
+  deleteItem
 };

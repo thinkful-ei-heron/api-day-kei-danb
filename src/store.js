@@ -2,6 +2,7 @@ import item from './item';
 
 const items = [];
 let hideCheckeditems = false;
+let error = '';
 
 const findById = function (id) {
   return this.items.find(currentItem => currentItem.id === id);
