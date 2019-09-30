@@ -1,9 +1,7 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/kisobe';
 
 const getItems = function() {
-  return fetch(`${BASE_URL}/items`).then(function(response) {
-    return response;
-  });
+  return fetch(`${BASE_URL}/items`);
 };
 
 const createItem = function(name) {
@@ -16,8 +14,6 @@ const createItem = function(name) {
       'Content-Type': 'application/json'
     },
     body: newItem
-  }).then( function(response) {
-    return response;
   });
 };
 
@@ -28,8 +24,6 @@ const updateItem = function(id, updateData){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(updateData)
-  }).then( function(response) {
-    return response;
   });
 };
 
