@@ -13,7 +13,10 @@ const main = function () {
       items.forEach((item) => store.addItem(item));
       shoppingList.renderData();
     })
-    .catch(err => shoppingList.renderError(err.message));
+    .catch(err => {
+      store.error = true;
+      shoppingList.renderError(err.message);
+    });
   shoppingList.bindEventListeners();
   shoppingList.renderData();
 };
