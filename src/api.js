@@ -1,39 +1,46 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/kisobe';
 
+const listApiFetch = function(url, method, newData){
+  let error = false;
+  return fetch(url, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: newData
+  })
+    .then(res => {
+      if(!res.ok) {
+        error = {code: res.status};
+      }
+      return res.json();
+    })
+    .then( data => {
+      if (error){
+        error.message = data.message;
+        return Promise.reject(error);
+      }
+      return data;
+    });
+};
+
 const getItems = function() {
-  return fetch(`${BASE_URL}/items`);
+  return listApiFetch(`${BASE_URL}/items`);
+
 };
 
 const createItem = function(name) {
-  let newItem = JSON.stringify({
+  return listApiFetch(`${BASE_URL}/items`, 'POST', JSON.stringify({
     'name': name,
-  });
-  return fetch(`${BASE_URL}/items`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: newItem
-  });
+  }));
 };
 
 const updateItem = function(id, updateData){
-  return fetch(`${BASE_URL}/items/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updateData)
-  });
+  return listApiFetch(`${BASE_URL}/items/${id}`, 'PATCH', JSON.stringify(updateData));
 };
 
 const deleteItem = function(id){
-  return fetch(`${BASE_URL}/items/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  });
+  return listApiFetch(`${BASE_URL}/items/${id}`, 'DELETE');
 };
 
 export default {
